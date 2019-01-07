@@ -2,7 +2,6 @@ package com.worldpay.offer.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -10,7 +9,7 @@ import java.util.Date;
 public class Offer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -23,7 +22,7 @@ public class Offer {
     @Column(name = "currency")
     private String currency;
 
-    @Column(name = "price")
+    @Column(name = "price", precision=5, scale=2)
     private BigDecimal price;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -31,20 +30,12 @@ public class Offer {
     private Date createdDate;
 
     @Column(name = "expiry_time")
-    private Instant expiryTime;
+    private long expiryTimeMin;
+
+    @Column(name = "status")
+    private Status status;
 
     public Offer(){
-
-    }
-
-    public Offer(long id, long merchandId, String description, String currency, BigDecimal price, Date createdDate, Instant expiryTime) {
-        this.id = id;
-        this.merchandId = merchandId;
-        this.description = description;
-        this.currency = currency;
-        this.price = price;
-        this.createdDate = createdDate;
-        this.expiryTime = expiryTime;
     }
 
     public long getId() {
@@ -95,12 +86,20 @@ public class Offer {
         this.createdDate = createdDate;
     }
 
-    public Instant getExpiryTime() {
-        return expiryTime;
+    public long getExpiryTimeMin() {
+        return expiryTimeMin;
     }
 
-    public void setExpiryTime(Instant expiryTime) {
-        this.expiryTime = expiryTime;
+    public void setExpiryTimeMin(long expiryTimeMin) {
+        this.expiryTimeMin = expiryTimeMin;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
 

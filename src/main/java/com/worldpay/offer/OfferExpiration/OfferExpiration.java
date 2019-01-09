@@ -48,7 +48,7 @@ public class OfferExpiration {
             Date offerTime = eachOffer.getCreatedDate();
             LocalDateTime offerreatedTime = LocalDateTime.ofInstant(offerTime.toInstant(), ZoneId.systemDefault());
             if(eachOffer.getExpiryTimeMin() >= Duration.between(currentTime,offerreatedTime).toMinutes()){
-                logger.info("!!!!!!!!!!!!" + eachOffer.getId());
+                logger.info("Offer with offer Id: " + eachOffer.getId()+ ", is expired!");
                 eachOffer.setStatus(Status.EXPIRED);
                 offerService.updateStatus(eachOffer);
             }
